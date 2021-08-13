@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+
+    database:
+        image: postgres
+        container_name: database_ctmns_products
+        restart: always
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=docker
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_DB=ctmns
+        volumes:
+            - pgdata:/data/postgres
+
+    app:
+        build: .
+        container_name: ctmns_products
+        ports:
+            - 3333:3333
+            - 9229:9229
+        volumes:
+            - .:/usr/app
+        links:
+            - database
+        depends_on:
+            - database
+volumes:
+    pgdata:
+        driver: local
