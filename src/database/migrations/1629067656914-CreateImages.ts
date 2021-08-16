@@ -1,10 +1,11 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
-export default class CreateProducts1628792027968 implements MigrationInterface {
+export class CreateImages1629067656914 implements MigrationInterface {
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: 'products',
+                name: 'images',
                 columns: [
                     {
                         name: 'id',
@@ -12,16 +13,13 @@ export default class CreateProducts1628792027968 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: 'name',
+                        name: 'url',
                         type: 'varchar',
                     },
                     {
-                        name: 'description',
-                        type: 'varchar',
-                    },
-                    {
-                        name: 'price',
-                        type: 'int',
+                        name: 'productId',
+                        type: 'uuid',
+                        isNullable: true,
                     },
                     {
                         name: 'created_at',
@@ -36,9 +34,21 @@ export default class CreateProducts1628792027968 implements MigrationInterface {
                 ],
             }),
         );
+
+        await queryRunner.createForeignKey(
+            'images',
+            new TableForeignKey({
+                columnNames: ['productId'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'products',
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE',
+            }),
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('products');
+        await queryRunner.dropTable('images');
     }
+
 }

@@ -1,8 +1,9 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Column, CreateDateColumn, UpdateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
+import Image from './Image';
 
 @Entity('products')
-class Producst {
+class Product {
     @PrimaryColumn()
     id?: string;
 
@@ -15,8 +16,15 @@ class Producst {
     @Column('int')
     price: number;
 
+    @OneToMany(() => Image, image => image.product)
+    images: Image[];
+
     @CreateDateColumn()
     created_at: Date;
+
+    @UpdateDateColumn()
+    updated_at: Date;
+
 
     constructor() {
         if (!this.id) {
@@ -29,4 +37,4 @@ class Producst {
     }
 }
 
-export default Producst;
+export default Product;
