@@ -7,8 +7,12 @@ import 'express-async-errors';
 import AppError from './errors/AppError';
 import routes from './routes';
 import './database';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
+
 app.use(express.json());
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerFile));
