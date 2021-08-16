@@ -5,7 +5,7 @@ import { define } from "typeorm-seeding";
 define(Product, (faker: typeof Faker) => {
     const productName = faker.commerce.productName();
     const description = faker.lorem.text();
-    const price = faker.random.number();
+    const price = faker.random.number({ min: 100, max: 100000 });
 
     const product = new Product()
     product.name = productName

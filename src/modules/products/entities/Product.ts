@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, UpdateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
 import Image from './Image';
+import { Exclude } from "class-transformer";
 
 @Entity('products')
 class Product {
@@ -19,9 +20,11 @@ class Product {
     @OneToMany(() => Image, image => image.product)
     images: Image[];
 
+    @Exclude()
     @CreateDateColumn()
     created_at: Date;
 
+    @Exclude()
     @UpdateDateColumn()
     updated_at: Date;
 
