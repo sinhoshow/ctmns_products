@@ -15,7 +15,8 @@ class ListProductsController {
         const perPage = parseInt(perPageRequest);
 
         const products = await this.listProductsUseCase.execute({ search, sort, page, perPage });
-        return response.status(200).json({ status: "success", data: { products } });
+
+        return response.status(200).json({ status: "success", data: products });
     }
 }
 
