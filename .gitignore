@@ -41,3 +41,4 @@ pids
 
 dist
 ormconfig.json
+ormconfig.js
