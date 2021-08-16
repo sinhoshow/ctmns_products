@@ -17,7 +17,9 @@ class Product {
     @Column('int')
     price: number;
 
-    @OneToMany(() => Image, image => image.product)
+    @OneToMany(() => Image, image => image.product, {
+        eager: true
+    })
     images: Image[];
 
     @Exclude()

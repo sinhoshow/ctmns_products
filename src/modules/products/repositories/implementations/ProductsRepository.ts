@@ -12,7 +12,7 @@ class ProductsRepository implements IProductsRepository {
     }
 
     async list({ search, sort, page, perPage }: IProductSearch): Promise<IProductResponse> {
-        const builder = this.repository.createQueryBuilder('products');
+        const builder = this.repository.createQueryBuilder('products').leftJoinAndSelect("products.images", "images");
         const offset = (page - 1) * perPage;
 
         if (search) {
