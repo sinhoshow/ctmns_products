@@ -1,5 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import AppError from '../../../../errors/AppError';
+import { classToPlain } from "class-transformer";
 
 import Product from '../../entities/Product';
 import { IProductsRepository, IProductSearch, IProductResponse } from '../IProductsRepository';
@@ -25,7 +26,8 @@ class ProductsRepository implements IProductsRepository {
         builder.offset(offset).limit(perPage);
         const total = await builder.getCount();
 
-        const products = await builder.getMany();
+        const products = classToPlain(await builder.getMany());
+
 
         if (products.length == 0) {
             throw new AppError("Products not found!", 404);

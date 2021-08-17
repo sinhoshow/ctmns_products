@@ -8,14 +8,14 @@ interface IProductSearch {
 }
 
 interface IProductResponse {
-    products: Product[],
+    products: Record<string, any>,
     total: number,
     page: number,
     last_page: number
 }
 
 interface IProductsRepository {
-    list({ search }: IProductSearch): Promise<IProductResponse>;
+    list({ search, sort, page, perPage }: IProductSearch): Promise<IProductResponse>;
 }
 
 export { IProductsRepository, IProductSearch, IProductResponse };

@@ -1,6 +1,5 @@
-import Product from "../../entities/Product";
-import { IProductsRepository } from "../../repositories/IProductsRepository";
-import { classToPlain } from "class-transformer";
+import { IProductResponse, IProductsRepository } from "../../repositories/IProductsRepository";
+
 
 interface IRequest {
     search?: string,
@@ -12,9 +11,9 @@ interface IRequest {
 class ListProductsUseCase {
     constructor(private ProductsRepository: IProductsRepository) { }
 
-    async execute({ search, sort, page, perPage }: IRequest): Promise<Product[]> {
+    async execute({ search, sort, page, perPage }: IRequest): Promise<IProductResponse> {
         const products = await this.ProductsRepository.list({ search, sort, page, perPage });
-        return classToPlain(products);
+        return products;
     }
 }
 
