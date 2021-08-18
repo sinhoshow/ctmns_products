@@ -40,6 +40,5 @@ pids
 .yarn-integrity
 
 dist
-ormconfig.json
 ormconfig.js
 src/shared/infra/typeorm/test_db.sqlite
