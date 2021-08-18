@@ -1,20 +1,14 @@
-import { Connection, createConnection, getConnectionOptions } from 'typeorm';
+import { Connection, ConnectionOptions, createConnection, getConnectionOptions } from 'typeorm';
+import ormTestConfig from '../../../../ormconfig.test.json';
 
 export default async (host = "database"): Promise<Connection> => {
-    const defaultOptions = await getConnectionOptions();
+    const defaultOptions = process.env.NODE_ENV === 'test' ? ormTestConfig as ConnectionOptions : await getConnectionOptions();
 
     return createConnection(
         Object.assign(defaultOptions, {
-            type: process.env.NODE_ENV === 'test'
-                ? 'sqlite'
-                : defaultOptions.type,
-            host: process.env.NODE_ENV === 'development'
-                ? host
-                : 'localhost',
-            database:
-                process.env.NODE_ENV === 'test'
-                    ? 'src/shared/infra/typeorm/test_db.sqlite'
-                    : defaultOptions.database,
+            host: process.env.NODE_ENV === 'production'
+                ? 'localhost'
+                : host
         })
     );
 };
