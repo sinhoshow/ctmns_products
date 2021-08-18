@@ -1,8 +1,8 @@
 import { getRepository, Repository } from 'typeorm';
-import AppError from '../../../../errors/AppError';
+import AppError from "@errors/AppError";
 import { classToPlain } from "class-transformer";
 
-import Product from '../../entities/Product';
+import Product from '@modules/products/entities/Product';
 import { IProductsRepository, IProductSearch, IProductResponse } from '../IProductsRepository';
 
 class ProductsRepository implements IProductsRepository {
@@ -23,7 +23,7 @@ class ProductsRepository implements IProductsRepository {
             builder.orderBy("products.price", sort);
         }
 
-        builder.offset(offset).limit(perPage);
+        builder.skip(offset).take(perPage);
         const total = await builder.getCount();
 
         const products = classToPlain(await builder.getMany());

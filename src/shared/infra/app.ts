@@ -1,13 +1,18 @@
 import 'reflect-metadata';
 import swaggerUI from 'swagger-ui-express';
-import swaggerFile from './swagger.json';
+import swaggerFile from '../../swagger.json';
 import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
-import AppError from './errors/AppError';
-import routes from './routes';
-import './database';
+import AppError from '@errors/AppError';
+import routes from '../../routes';
+import './typeorm';
 import cors from 'cors';
+import createConnnection from "./typeorm";
+
+import "@shared/container";
+
+createConnnection();
 
 const app = express();
 

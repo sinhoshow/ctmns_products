@@ -1,4 +1,5 @@
-import { IProductResponse, IProductsRepository } from "../../repositories/IProductsRepository";
+import { inject, injectable } from "tsyringe";
+import { IProductResponse, IProductsRepository } from "@modules/products/repositories/IProductsRepository";
 
 
 interface IRequest {
@@ -7,12 +8,15 @@ interface IRequest {
     page: number,
     perPage: number
 }
-
+@injectable()
 class ListProductsUseCase {
-    constructor(private ProductsRepository: IProductsRepository) { }
+    constructor(
+        @inject("ProductsRepository")
+        private productsRepository: IProductsRepository
+    ) { }
 
     async execute({ search, sort, page, perPage }: IRequest): Promise<IProductResponse> {
-        const products = await this.ProductsRepository.list({ search, sort, page, perPage });
+        const products = await this.productsRepository.list({ search, sort, page, perPage });
         return products;
     }
 }

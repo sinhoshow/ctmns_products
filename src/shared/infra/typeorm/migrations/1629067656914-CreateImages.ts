@@ -24,12 +24,12 @@ export class CreateImages1629067656914 implements MigrationInterface {
                     {
                         name: 'created_at',
                         type: 'timestamp',
-                        default: 'now()',
+                        default: 'current_timestamp',
                     },
                     {
                         name: 'updated_at',
                         type: 'timestamp',
-                        default: 'now()',
+                        default: 'current_timestamp',
                     },
                 ],
             }),

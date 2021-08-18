@@ -1,8 +1,6 @@
 import { Factory, Seeder } from 'typeorm-seeding';
-import Product from '../../modules/products/entities/Product';
-import Image from '../../modules/products/entities/Image';
-import { image } from 'faker';
-import { productsRouter } from '../../routes/products.routes';
+import Product from '../../../../modules/products/entities/Product';
+import Image from '../../../../modules/products/entities/Image';
 
 export default class CreateImageProducts implements Seeder {
     public async run(factory: Factory): Promise<any> {

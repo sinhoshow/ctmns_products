@@ -1,5 +1,3 @@
-import Product from '../entities/Product';
-
 interface IProductSearch {
     search?: String;
     sort?: 'ASC' | 'DESC'

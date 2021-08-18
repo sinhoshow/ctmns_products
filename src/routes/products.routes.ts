@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import listProductsController from '../modules/products/useCases/listProducts';
+import ListProductsController from '../modules/products/useCases/listProducts/ListProductsController';
 
 const productsRouter = Router();
 
-productsRouter.get('/', (request, response) => {
-    return listProductsController().handle(request, response);
-});
+const listProductsController = new ListProductsController();
+
+productsRouter.get('/', listProductsController.handle);
 
 export { productsRouter };

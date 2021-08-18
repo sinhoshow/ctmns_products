@@ -5,14 +5,12 @@
     "license": "MIT",
     "scripts": {
         "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-        "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+        "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/server.ts",
         "start": "node dist/server.js",
-        "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+        "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
         "seed:config": "ts-node-dev ./node_modules/typeorm-seeding/dist/cli.js config",
         "seed:run": "ts-node-dev ./node_modules/typeorm-seeding/dist/cli.js seed",
-        "pretest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli migration:run",
-        "test": "NODE_ENV=test jest",
-        "posttest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli migration:revert"
+        "test": "NODE_ENV=test jest"
     },
     "devDependencies": {
         "@babel/cli": "^7.14.8",
@@ -43,9 +41,10 @@
         "eslint-plugin-prettier": "^3.1.4",
         "jest": "^27.0.6",
         "prettier": "^2.1.2",
-        "supertest": "^6.1.5",
+        "supertest": "^6.1.6",
         "ts-jest": "^27.0.5",
         "ts-node-dev": "^1.0.0-pre.63",
+        "tsconfig-paths": "^3.10.1",
         "typescript": "^4.0.3"
     },
     "dependencies": {
@@ -62,6 +61,7 @@
         "ssh2-promise": "^0.1.7",
         "swagger-ui-express": "^4.1.6",
         "ts-node": "^10.2.0",
+        "tsyringe": "^4.6.0",
         "typeorm": "^0.2.36",
         "typeorm-seeding": "^1.6.1",
         "uuid": "^8.3.2"
